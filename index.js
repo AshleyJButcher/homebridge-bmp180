@@ -33,7 +33,7 @@ function BMPXXXSensor(log, config) {
     this.log = log;
     this.name = config.name;
     this.lastTimestamp = new Date();
-    this.barometer = new BMP180.BMP180()();
+    this.barometer = new BMP180.BMP180();
     var that = this;
     this.barometer.read(function(data) {
         that.lastRecord = data;
