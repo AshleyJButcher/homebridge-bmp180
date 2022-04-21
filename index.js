@@ -6,8 +6,8 @@ var inherits = require('util').inherits;
 // the i2c module won't install on a raspberry pi
 // please see https://github.com/kelly/node-i2c/issues/69
 // jnovack provides a work around.
-// clone the bmp085 project into the folder below
-var BMP085 = require('./bmp085_lib/bmp085');
+// clone the BMP180 project into the folder below
+var BMP180 = require('node-bmp180');
 
 // timeout to rest the device a little.
 var timeDifference = 2500;
@@ -33,7 +33,7 @@ function BMPXXXSensor(log, config) {
     this.log = log;
     this.name = config.name;
     this.lastTimestamp = new Date();
-    this.barometer = new BMP085();
+    this.barometer = new BMP180.BMP180()();
     var that = this;
     this.barometer.read(function(data) {
         that.lastRecord = data;
@@ -89,7 +89,7 @@ function BMPXXXSensor(log, config) {
         
     this.informationService
     .setCharacteristic(Characteristic.Manufacturer, config.manufacturer || "Bosch")
-    .setCharacteristic(Characteristic.Model, config.model || "BMP085")
+    .setCharacteristic(Characteristic.Model, config.model || "BMP180")
     .setCharacteristic(Characteristic.SerialNumber, config.serial || "775D80FF");
 
 
