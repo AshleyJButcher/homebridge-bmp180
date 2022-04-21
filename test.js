@@ -1,8 +1,8 @@
-var BMP085 = require('./bmp085_lib/bmp085'),
-    barometer = new BMP085();
+var BMP180 = require('node-bmp180');
+var barometer = new BMP180.BMP180();
 
-barometer.read(function (data) {
-    console.log("Temperature:", data.temperature);
-    console.log("Pressure:", data.pressure);
-    console.log("typeof " + typeof(data.pressure));
+barometer.read().then((t) =>{
+
+   console.log(`Pressure: ${t.pressure} Pa`);
+   console.log(`Temperature: ${t.temperature} C`);
 });
