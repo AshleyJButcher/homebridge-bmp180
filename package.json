@@ -4,17 +4,20 @@
     "description": "BMP085 and BMP180 plugin for homebridge",
     "main": "index.js",
     "scripts": {
-      "test": "echo \"Error: no test specified\" && exit 1"
+        "test": "echo \"Error: no test specified\" && exit 1"
     },
     "keywords": [
-      "homebridge-plugin",
-      "dht22",
-      "dht11"
+        "homebridge-plugin",
+        "dht22",
+        "dht11"
     ],
     "author": "lucabecker",
     "license": "none",
-    "engines" : {
+    "engines": {
         "node": ">=0.12.0",
         "homebridge": ">=0.2.0"
+    },
+    "dependencies": {
+        "node-bmp180": "^1.1.0"
     }
 }
