@@ -7,7 +7,7 @@ var inherits = require('util').inherits;
 // please see https://github.com/kelly/node-i2c/issues/69
 // jnovack provides a work around.
 // clone the BMP180 project into the folder below
-var BMP180 = require('node-bmp180');
+const bmp180 = require('bmp180-sensor')
 
 // timeout to rest the device a little.
 var timeDifference = 2500;
@@ -29,11 +29,22 @@ module.exports = function(homebridge) {
     homebridge.registerAccessory("homebridge-bmpxxx", "bmpxxx", BMPXXXSensor);
 };
 
+async function readBmp180() {
+    const sensor = await bmp180({
+        address: 0x77,
+        mode: 1,
+    })
+
+    const data = await sensor.read();   
+    await sensor.close();
+    return data;
+}
+
 function BMPXXXSensor(log, config) {
     this.log = log;
     this.name = config.name;
     this.lastTimestamp = new Date();
-    this.barometer = new BMP180.BMP180();
+    this.barometer = readBmp180();
     var that = this;
     this.barometer.read(function(data) {
         that.lastRecord = data;
