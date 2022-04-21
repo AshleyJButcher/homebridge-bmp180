@@ -1,7 +1,7 @@
 {
-    "name": "homebridge-bmpxxx",
-    "version": "0.1",
-    "description": "BMP085 and BMP180 plugin for homebridge",
+    "name": "homebridge-bmp180",
+    "version": "1.0.0",
+    "description": "BMP180 plugin for homebridge",
     "main": "index.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1"
