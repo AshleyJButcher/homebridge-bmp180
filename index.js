@@ -46,7 +46,7 @@ function BMPXXXSensor(log, config) {
     this.lastTimestamp = new Date();
     this.barometer = readBmp180();
     var that = this;
-    this.barometer.read(function(data) {
+    this.barometer.then(function(data) {
         that.lastRecord = data;
     });
 
@@ -128,7 +128,7 @@ function BMPXXXSensor(log, config) {
         setInterval(function() {
             that.lastTimestamp = new Date();
 
-            that.barometer.read(function(data) {
+            that.barometer.then(function(data) {
 
                 that.lastRecord = data;
 
@@ -145,7 +145,7 @@ BMPXXXSensor.prototype.getTemp = function(callback) {
     if (diffBigEnough(this.lastTimestamp)) {
         this.lastTimestamp = new Date();
         var that = this;
-        this.barometer.read(function(data) {
+        this.barometer.then(function(data) {
             that.lastRecord = data;
             that.eve_service.getCharacteristic(EveAirPressure)
                 .setValue(parseFloat(data.pressure.toFixed(2)));
@@ -160,7 +160,7 @@ BMPXXXSensor.prototype.getCurrentAirPressure = function(callback) {
     if (diffBigEnough(this.lastTimestamp)) {
         this.lastTimestamp = new Date();
         var that = this;
-        this.barometer.read(function(data) {
+        this.barometer.then(function(data) {
             that.lastRecord = data;
             that.service_therm.getCharacteristic(Characteristic.CurrentTemperature)
                 .setValue(data.temperature);

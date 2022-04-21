@@ -9,4 +9,7 @@ async function readBmp180() {
     await sensor.close();
     return data;
 }
-readBmp180().then(t => console.log(t));
+var barometer = readBmp180();
+barometer.then(function(data) {
+    console.log(data)
+});
